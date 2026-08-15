@@ -16,7 +16,7 @@ Este proyecto es la primera etapa de una idea más grande: una app donde el clie
 Requiere Python 3 instalado.
 
 ```bash
-python resto.py
+python restolimpio.py
 ```
 
 Seguí las instrucciones en pantalla: elegí platos por número, escribí `listo` para pasar a las bebidas, y de nuevo `listo` al terminar para ver la comanda y el total.
