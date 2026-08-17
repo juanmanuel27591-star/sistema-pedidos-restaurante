@@ -1,61 +1,53 @@
-# Sistema de Pedidos para Restaurantes (prototipo de consola)
+# Sistema de Pedidos para Restaurantes
 
-Prototipo en Python que simula la lógica central de una app de pedidos para restaurantes/bares: el cliente elige platos y bebidas de un menú, y el sistema arma la comanda con cantidades y calcula el total a pagar.
+Proyecto que simula, y después implementa como app web, el flujo de pedidos de un restaurante/bar: el cliente elige platos y bebidas de un menú, indica su mesa, revisa y confirma el pedido, y este llega a una vista de cocina con el detalle y el total a pagar.
 
-Este proyecto es la primera etapa de una idea más grande: una app donde el cliente escanea un código QR en la mesa, pide desde su celular, y el pedido llega directo a cocina/mozo — sin necesidad de que el mozo tome nota a mano. Esta versión de consola resuelve toda la lógica de negocio antes de sumarle una interfaz web.
+Es la primera etapa de una idea más grande: una app donde el cliente escanea un código QR en la mesa, pide desde su celular, y el pedido llega directo a cocina/mozo — sin necesidad de que el mozo tome nota a mano.
 
-## Qué hace
+El proyecto tiene dos versiones, en carpetas separadas, que muestran la evolución del desarrollo:
 
-- Muestra el menú de platos y bebidas, numerado y con precios.
-- Permite ir eligiendo ítems por número, validando que el dato ingresado sea correcto (rechaza texto no numérico y números fuera de rango).
-- Agrupa el pedido en una comanda con cantidades (ej: `3 x Milanesa`) en vez de mostrar ítems repetidos.
-- Calcula el subtotal por ítem y el total final a pagar.
+## `consola/` — prototipo de terminal
 
-## Cómo correrlo
+La primera versión, hecha para resolver y probar toda la lógica de negocio antes de sumarle una interfaz.
 
-Requiere Python 3 instalado.
+**Qué hace:** muestra el menú numerado con precios, permite elegir ítems por número (validando datos inválidos), agrupa el pedido en una comanda con cantidades, y calcula el total a pagar.
 
+**Cómo correrlo:**
 ```bash
-python restolimpio.py
+cd consola
+python resto_limpio.py
 ```
 
-Seguí las instrucciones en pantalla: elegí platos por número, escribí `listo` para pasar a las bebidas, y de nuevo `listo` al terminar para ver la comanda y el total.
+## `web/` — versión web con Flask
 
-## Ejemplo de uso
+La misma lógica, ahora accesible desde un navegador, con un flujo completo de cliente y una vista para cocina.
 
+**Qué hace:**
+- Muestra el menú (platos y bebidas) en una página web, con precios.
+- El cliente indica su mesa y elige cantidades por ítem.
+- Pantalla de revisión antes de confirmar (para poder corregir mesa o cantidades).
+- Al confirmar, el pedido se guarda y aparece en `/cocina`, agrupado por mesa.
+
+**Cómo correrlo:**
+```bash
+cd web
+python app.py
 ```
---- Platos ---
-1 Milanesa - $35000
-2 Fideos - $30000
-3 Sandwich - $25000
-4 Pizza - $20000
-5 Empanadas - $5000
-Que queres pedir? o ('listo'): 1
-Que queres pedir? o ('listo'): 1
-Que queres pedir? o ('listo'): listo
---- Bebidas ---
-1 Cerveza - $5000
-2 vino - $5000
-...
-Que queres pedir? o ('listo'): listo
---- Tu pedido ---
-2 x Milanesa - $70000
-Total a pagar: $70000
-```
+Después abrí `http://127.0.0.1:5000` en el navegador. La vista de cocina está en `http://127.0.0.1:5000/cocina`.
 
-## Estructura del código
-
-- `platos` / `bebidas`: listas del menú, cada ítem es una tupla `(nombre, precio)`.
-- `mostrar_menu()`: imprime un menú numerado con precios.
-- `elegir_items()`: maneja la elección de ítems del cliente, con validación de datos inválidos.
-- `main()`: orquesta el flujo completo (mostrar menú, tomar pedido, armar comanda, calcular total).
+**Estructura:**
+- `app.py`: rutas y lógica del servidor (`/`, `/pedido`, `/confirmar`, `/cocina`).
+- `templates/menu.html`: página principal con el formulario de pedido.
+- `templates/pedido.html`: pantalla de revisión antes de confirmar.
+- `templates/confirmado.html`: confirmación final para el cliente.
+- `templates/cocina.html`: vista con todos los pedidos recibidos.
 
 ## Próximos pasos
 
-- Pasar la interfaz de consola a una app web (Flask), accesible desde un QR en la mesa.
-- Persistir el menú y los pedidos en una base de datos.
-- Pantalla en tiempo real para cocina/mozo.
+- Guardar el menú y los pedidos en una base de datos (en vez de listas fijas en el código).
+- Panel para que el dueño del restaurante pueda cargar y editar su propio menú.
+- Configuración de topes (cantidad máxima por ítem, número de mesa según el tamaño del local).
 
 ## Sobre este proyecto
 
-Hecho como proyecto de aprendizaje, programado línea por línea a mano para afianzar los fundamentos de Python (variables, condicionales, bucles, funciones, listas, diccionarios, manejo de errores) antes de escalar a una aplicación web completa.
+Hecho como proyecto de aprendizaje, programado línea por línea a mano para afianzar los fundamentos de Python (variables, condicionales, bucles, funciones, listas, diccionarios, manejo de errores) y dar el salto a desarrollo web con Flask (rutas, templates, formularios).

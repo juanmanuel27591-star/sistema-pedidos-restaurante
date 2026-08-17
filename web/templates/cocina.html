@@ -1,0 +1,13 @@
+<h1>Pedidos - Cocina</h1>
+
+{% for pedido in pedidos %}
+
+    <hr>
+    <h3>Mesa {{ pedido.mesa }}</h3>
+    <ul>
+
+    {% for nombre, cantidad, subtotal in pedido.detalle %}
+        <li>{{ cantidad }} x {{ nombre }}</li>
+    {% endfor %}
+    </ul>
+{% endfor %}
