@@ -5,12 +5,11 @@
     <label>
         Número de mesa:
         <input type="number" name="mesa" min="1" required>
-
     </label>
     <br><br>
 
     <h2>Platos</h2>
-    {% for nombre, precio in platos %}
+    {% for id_item, nombre, precio in platos %}
         <label>
             {{ nombre }} - ${{ precio }}
             <input type="number" name="{{ nombre }}" value="0" min="0">
@@ -18,7 +17,7 @@
     {% endfor %}
 
     <h2>Bebidas</h2>
-    {% for nombre, precio in bebidas %}
+    {% for id_item, nombre, precio in bebidas %}
         <label>
             {{ nombre }} - ${{ precio }}
             <input type="number" name="{{ nombre }}" value="0" min="0">
